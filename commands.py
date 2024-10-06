@@ -1,5 +1,5 @@
 from codeop import compile_command
-
+import json
 import classes
 
 class AddCommand:
@@ -16,6 +16,13 @@ class AddCommand:
             print("Числа в школе прохodil??")
             return
         self.productStorage.storage.append(classes.Product(params[0], params[1]))
+
+        with open("storage.json", "w") as storage_file:
+            packed_product = []
+            for product in self.productStorage.storage:
+                packed_product.append(product.__dict__())
+            json.dump(packed_product, storage_file)
+
 
 
 class ListCommand:

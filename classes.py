@@ -6,6 +6,9 @@ class Product:
     def __str__(self):
         return self.name + " по цене: " + str(self.cost) + "р."
 
+    def __dict__(self):    return {
+        "name": self.name, "cost": self.cost
+    }
 
 class CommandInput:
     def __init__(self, command_str: str):

@@ -1,8 +1,20 @@
 import classes
 import commands
+import json
 
 def work():
     productStorage1 = classes.ProductStorage("DotaStore N1" ,[])
+
+    try:
+        with open("storage.json", "r") as storage_file:
+            packed_products = json.load(storage_file)
+            for product in packed_products:
+                productStorage1.storage.append(classes.Product(
+                product["name"], product["cost"])
+            )
+    except json.decoder.JSONDecodeError:
+        print("Пустое хранилище")
+
     prorab = classes.Prorab({
         "add": commands.AddCommand(productStorage1),
         "list": commands.ListCommand(productStorage1),
